@@ -1,7 +1,8 @@
 from random import randint
 from QuemSouEu.mamifero import mamifero
-import pandas as pd
-import openpyxl
+from QuemSouEu.jogador import Jogador
+from time import sleep
+
 
 class jogo():
     def __init__(self):
@@ -13,6 +14,15 @@ class jogo():
 
     def continua(self):
         while True:
+            while True:
+                opcao = input("Deseja ver o ranking? [S/N]: ").upper()
+                if opcao == "S":
+                    Jogador.ler_ranking()
+                    break
+                elif opcao == "N":
+                    break
+                else:
+                    print("Digite S ou N!")
             escolha = input("Deseja jogar novamente? [S/N]: ").upper()
             self.cont = escolha
             if self.cont == "S" or self.cont == "N":
@@ -74,14 +84,23 @@ class jogo():
             self.continua()
 
     def tabela(self, nome, pontos):
+        j1 = Jogador(nome, pontos)
+        try:
+            j1.adicionar_jogador()
+        except:
+            print("Algo inesperado ocorreu.")
+            sleep(2.5)
+
+"""
+    def tabela(self, nome, pontos):
         pontuacoes = pd.read_excel("Pontuacoes.xlsx")
         df = pd.DataFrame(pontuacoes)
         insert = [[nome, pontos]]
         novo = pd.DataFrame(data=insert, columns=['Nome', 'Pontuação'])
-        print(novo)
         final = pd.concat([df, novo], ignore_index=True, sort=True)
 
         final.to_excel("Pontuacoes.xlsx")
+"""
 
 
 if __name__ == "__main__":
