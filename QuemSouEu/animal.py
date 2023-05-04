@@ -16,6 +16,10 @@ class animal():
         return " "
 
     @property
+    def temperatura(self):
+        return " "
+
+    @property
     def especie(self):
         return self._especie
 

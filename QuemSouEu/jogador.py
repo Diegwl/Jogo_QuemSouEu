@@ -36,10 +36,6 @@ class Jogador:
         dados.to_excel("Pontuacoes.xlsx", index=False)
 
     @staticmethod
-    def limpa_planilha():
-        os.remove("Pontuacoes.xlsx")
-
-    @staticmethod
     def ler_ranking():
         planilha = pd.read_excel("Pontuacoes.xlsx")
         ranking = planilha.loc[:, ['Nome', 'Pontos']]

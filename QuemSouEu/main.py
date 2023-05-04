@@ -1,5 +1,6 @@
 from random import randint
 from QuemSouEu.mamifero import mamifero
+from QuemSouEu.anfibio import anfibio
 from QuemSouEu.jogador import Jogador
 from time import sleep
 
@@ -7,6 +8,7 @@ from time import sleep
 class jogo():
     def __init__(self):
         self.cont = "S"
+        self.dicas = list()
 
     def nome(self):
         nome = input("Digite o seu Nome: ")
@@ -31,28 +33,40 @@ class jogo():
                 print("Digite apenas S ou N!")
 
     def palavra(self):
-        num = randint(1, 2)
-        if num == 1:
-            leao = mamifero("Espécie: Leão", "Respiração: Pulmonar", "Habitat: Savana", "Gestação: Ulterina",
-                            "Classe: Mamífero", "Tamanho: Médio", "Cor: Amarelo", "Curiosidade: É o Rei da selva",
-                            "Alimentação: Carnívoro", "Dentes: Afiados")
-            return leao
-        if num == 2:
-            ornitorrinco = mamifero("Espécie: Ornitorrinco", "Respiração: Pulmonar", "Habitat: Rios, Lagoas",
-                                    "Gestação: Bota ovos",
-                                    "Classe: Mamífero", "Tamanho: Pequeno", "Cor: Marrom",
-                                    "Curiosidade: Esse animal é um agente secreto em um desenho famoso",
-                                    "Alimentação: Herbívoro", "Possui Bico")
-            return ornitorrinco
+        x = randint(1, 2)
+        if x == 1:
+            num = randint(1, 2)
+            if num == 1:
+                leao = mamifero("Espécie: Leão", "Respiração: Pulmonar", "Habitat: Savana", "Gestação: Ulterina",
+                                "Classe: Mamífero", "Tamanho: Médio", "Cor: Amarelo", "Curiosidade: É o Rei da selva",
+                                "Alimentação: Carnívoro", "Dentes: Afiados")
+                return leao
+            if num == 2:
+                ornitorrinco = mamifero("Espécie: Ornitorrinco", "Respiração: Pulmonar", "Habitat: Rios, Lagoas",
+                                        "Gestação: Bota ovos",
+                                        "Classe: Mamífero", "Tamanho: Pequeno", "Cor: Marrom",
+                                        "Curiosidade: Esse animal é um agente secreto em um desenho famoso",
+                                        "Alimentação: Herbívoro", "Possui Bico")
+                return ornitorrinco
+        elif x == 2:
+            num = randint(1, 1)
+            if num == 1:
+                sapo = anfibio("Espécie: Sapo", "Respiração: Pulmonar e Cutânea", "Habitat: Riachos, Lagoas, Igarapés",
+                               "Gestação: Bota ovos", "Classe: Anfíbio", "Tamanho: Pequeno", "Cor: Verde",
+                               "Curiosidade: Não Lava o Pé", "Alimentação: Come Insetos", "Ordem: Anura")
+                return sapo
 
     def game(self):
         print("--- QUEM SOU EU ---")
         while self.cont == "S":
             nome = self.nome()
-            animal = self.palavra()
-            resposta = animal.especie
-            dicas = [animal.respiracao, animal.habitat, animal.gestacao, animal.classe, animal.tamanho, animal.cor,
-                     animal.curiosidade, animal.alimentacao, animal.dentes, animal.sangue]
+            animal1 = self.palavra()
+            resposta = animal1.especie
+            self.dicas.clear()
+            if animal1.classe == "Classe: Mamífero":
+                self.dicas = [animal1.respiracao, animal1.habitat, animal1.gestacao, animal1.classe, animal1.tamanho, animal1.cor, animal1.curiosidade, animal1.alimentacao, animal1.dentes, animal1.sangue, animal1.mama]
+            elif animal1.classe == "Classe: Anfíbio":
+                self.dicas = [animal1.respiracao, animal1.habitat, animal1.gestacao, animal1.classe, animal1.tamanho, animal1.cor, animal1.curiosidade, animal1.alimentacao, animal1.temperatura, animal1.ordem, animal1.pele]
             numeros = []
             jogadas = 0
             pontos = 0
@@ -60,11 +74,11 @@ class jogo():
             while jogadas <= 5:
                 jogadas += 1
                 while True:
-                    num = randint(0, len(dicas)-1)
+                    num = randint(0, len(self.dicas)-1)
                     if num not in numeros:
                         numeros.append(num)
                         break
-                print(dicas[num])
+                print(self.dicas[num])
                 print("-" * 30)
                 palpite = "Espécie: " + input(f"Digite seu {jogadas}º palpite: ").title()
                 print("-" * 30)

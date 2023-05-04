@@ -2,4 +2,5 @@ import pandas as pd
 import openpyxl
 from jogador import Jogador
 
-Jogador.cria_planilha()
+if __name__ == "__main__":
+    Jogador.cria_planilha()
