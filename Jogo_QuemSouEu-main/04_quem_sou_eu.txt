@@ -1,0 +1,26 @@
+Desafio 04 - Quem sou eu?
+
+Utilizar:
+- Método Estático @staticmethod
+- Método de Classe @classmethod
+- Atributo estático
+- Herança
+- Polimorfismo
+
+O jogo:
+- Criar uma lista com palavras e dicas de palavras (pelo menos 5 dicas);
+	Dicas separadas por nicho. Ex.: Pessoa, Cidade, Animal, etc.
+- O computador sorteia uma palavra para que o jogo comece (o jogador não sabe qual é a palavra);
+- Ao iniciar o jogo o jogador se identifica (nome);
+- Uma dica de palavra é exibida para o jogador;
+- Caso o jogador adivinhe a palavra com a primeira dica, ganha 5 pontos;
+- Caso o jogador erre a palavra, é mostrada a próxima dica;
+- Caso o jogador adivinhe com a segunda dica, ganha 4 pontos e assim sucessivamente;
+- Caso o jogador não adivinhe ao final da 5ª dica, o jogo mostra pra ele qual era a palavra sorteada e ele não ganha pontos.
+
+Atividade extra:
+- Criar um sistema de ranking utilizando planilha de excel (.xlsx ou .csv) utilizando pandas.
+- Dicas de colunas: Nome do Jogador, Pontos
+
+
+
