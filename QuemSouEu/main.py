@@ -11,10 +11,17 @@ class jogo():
         self.dicas = list()
 
     def nome(self):
+        """
+        Define o nome do usuário
+        :return: str nome
+        """
         nome = input("Digite o seu Nome: ")
         return nome
 
     def continua(self):
+        """
+        Menu que define se o jogador deseja ver o ranking e Jogar novamente
+        """
         while True:
             while True:
                 opcao = input("Deseja ver o ranking? [S/N]: ").upper()
@@ -33,6 +40,10 @@ class jogo():
                 print("Digite apenas S ou N!")
 
     def palavra(self):
+        """
+        Sorteia a Classe e o Animal secreto
+        :return: Object Animal
+        """
         x = randint(1, 2)
         if x == 1:
             num = randint(1, 2)
@@ -57,6 +68,9 @@ class jogo():
                 return sapo
 
     def game(self):
+        """
+        Realiza a lógica do jogo, onde temos as dicas e os palpites realizados pelo usuário, além de calcular a quantidade de pontos
+        """
         print("--- QUEM SOU EU ---")
         while self.cont == "S":
             nome = self.nome()
@@ -64,9 +78,11 @@ class jogo():
             resposta = animal1.especie
             self.dicas.clear()
             if animal1.classe == "Classe: Mamífero":
-                self.dicas = [animal1.respiracao, animal1.habitat, animal1.gestacao, animal1.classe, animal1.tamanho, animal1.cor, animal1.curiosidade, animal1.alimentacao, animal1.dentes, animal1.sangue, animal1.mama]
+                mama = animal1.mama()
+                self.dicas = [animal1.respiracao, animal1.habitat, animal1.gestacao, animal1.classe, animal1.tamanho, animal1.cor, animal1.curiosidade, animal1.alimentacao, animal1.dentes, animal1.sangue, mama]
             elif animal1.classe == "Classe: Anfíbio":
-                self.dicas = [animal1.respiracao, animal1.habitat, animal1.gestacao, animal1.classe, animal1.tamanho, animal1.cor, animal1.curiosidade, animal1.alimentacao, animal1.temperatura, animal1.ordem, animal1.pele]
+                pele = animal1.pele()
+                self.dicas = [animal1.respiracao, animal1.habitat, animal1.gestacao, animal1.classe, animal1.tamanho, animal1.cor, animal1.curiosidade, animal1.alimentacao, animal1.temperatura, animal1.ordem, pele]
             numeros = []
             jogadas = 0
             pontos = 0
@@ -88,6 +104,7 @@ class jogo():
                     print("-" * 30)
                     break
                 elif palpite != resposta and jogadas == 5:
+                    pontos = 0
                     print(f"Sinto muito, você perdeu\nA resposta era: {resposta}")
                     print("-" * 30)
                     break
@@ -98,6 +115,11 @@ class jogo():
             self.continua()
 
     def tabela(self, nome, pontos):
+        """
+        Função que cria o objeto Jogador, depois envia o objeto criado para o excel e adiciona ele ao ranking
+        :param nome: str
+        :param pontos: int
+        """
         j1 = Jogador(nome, pontos)
         try:
             j1.adicionar_jogador()
